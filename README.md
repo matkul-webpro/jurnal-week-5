@@ -36,16 +36,13 @@ JAWAB:
     sumber: bootstrap-pengenalan.html (line: 174)
 4.  .navbar           → membuat elemen jadi bar navigasi
 
-    .navbar-expand-md → navbar melebar (horizontal) saat layar ≥ md (768px)
-
-                        Di bawah md, navbar collapse jadi tombol hamburger.
-                        [md di Bootstrap = @media (min-width: 768px) di CSS biasa]
+    .navbar-expand-md → navbar melebar (horizontal) saat layar ≥ md (768px) Di bawah md, navbar collapse jadi tombol hamburger. [md di Bootstrap = @media (min-width: 768px) di CSS biasa]
     .navbar-dark      → teks & ikon navbar berwarna terang (untuk bg gelap)
 
     .bg-dark          → background gelap (Bootstrap utility color)
 
     .container        → membatasi lebar konten ke lebar tertentu (responsif)
-    
+
     sumber: bootstrap-pengenalan.html (line: 102)
 5. Gunakan class img-fluid pada tag <img>. Class ini menerapkan max-width: 100% dan height: auto, sehingga gambar mengecil mengikuti lebar elemen induknya dan proporsinya tetap, tapi tidak melebihi ukuran aslinya.
 
