@@ -1,5 +1,8 @@
 "# jurnal-week-5" 
 
+Nama: Muhammad Fikri Al Fathoni
+NIM: 103092400074
+
 1. Pengertian Bootstrap [10 poin] Jelaskan apa itu Bootstrap dan apa kegunaannya! 
 2. Memasang Bootstrap [10 poin] Ada beberapa cara untuk mengimpor atau menggunakan Bootstrap pada project. Sebutkan caracaranya! 
 3. Grid dan Breakpoint [10 poin] Jelaskan mengenai class grid dan kegunaan breakpoint! 
