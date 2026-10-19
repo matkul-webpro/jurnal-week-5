@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pengenalan Bootstrap</title>
+
+  <!--
+    =====================================================================
+    IMPORT BOOTSTRAP via CDN (Content Delivery Network)
+    Tidak perlu download, cukup koneksi internet saat buka halaman ini.
+
+    Bootstrap 5.3.0 → CSS (tampilan/style)
+    =====================================================================
+  -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+    crossorigin="anonymous"
+  />
+
+  <!--
+    Google Fonts — Satu typeface tebal untuk heading, satu clean untuk body.
+    Tidak wajib, tapi membuat teks lebih enak dibaca.
+  -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /*
+      ===================================================================
+      CSS KUSTOM — Ini berjalan "di atas" Bootstrap.
+      Bootstrap memberi dasar, CSS kita memodifikasi seperlunya.
+      ===================================================================
+    */
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fb;
+      color: #1e1e2e;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Sora', sans-serif;
+    }
+
+    /* Navbar kustom agar sedikit lebih gelap dari default Bootstrap */
+    .navbar-brand span {
+      color: #6ea8fe; /* biru muda — aksen utama */
+    }
+
+    /* Section header — garis bawah tipis sebagai penanda topik */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      border-left: 4px solid #6ea8fe;
+      padding-left: 0.75rem;
+      margin-bottom: 1.25rem;
+      color: #1e1e2e;
+    }
+
+    /* Card kustom dengan shadow halus */
+    .demo-card {
+      background: #ffffff;
+      border: 1px solid #e2e5ef;
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Kode inline — biar kelihatan seperti syntax highlight sederhana */
+    code {
+      background: #eef1ff;
+      color: #3b5bdb;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.88em;
+    }
+
+    /* Label penjelasan di samping demo */
+    .label-ket {
+      font-size: 0.78rem;
+      color: #6c757d;
+      margin-top: 0.25rem;
+    }
+
+    footer {
+      background: #1e1e2e;
+      color: #adb5bd;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+    =====================================================================
+    NAVBAR — Bootstrap class yang dipakai:
+
+    .navbar           → membuat elemen jadi bar navigasi
+    .navbar-expand-md → navbar melebar (horizontal) saat layar ≥ md (768px)
+                        Di bawah md, navbar collapse jadi tombol hamburger.
+                        [md di Bootstrap = @media (min-width: 768px) di CSS biasa]
+    .navbar-dark      → teks & ikon navbar berwarna terang (untuk bg gelap)
+    .bg-dark          → background gelap (Bootstrap utility color)
+    .container        → membatasi lebar konten ke lebar tertentu (responsif)
+    .navbar-brand     → nama/logo di navbar
+    .navbar-toggler   → tombol hamburger (muncul di layar kecil)
+    .collapse         → konten yang tersembunyi saat layar kecil
+    .navbar-collapse  → wrapper khusus untuk collapse di navbar
+    .navbar-nav       → daftar menu (ul) di dalam navbar
+    .nav-item         → satu item menu (li)
+    .nav-link         → tautan di dalam nav-item (a)
+    .active           → menandai halaman/link yang sedang aktif
+    =====================================================================
+  -->
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        Bootstrap<span>5</span>
+      </a>
+
+      <!-- Tombol hamburger muncul saat layar kecil (< md / < 768px) -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#menuNav"
+        aria-controls="menuNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Konten navbar yang collapse di layar kecil -->
+      <div class="collapse navbar-collapse" id="menuNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- ms-auto = margin-start: auto → mendorong menu ke kanan (CSS: margin-left: auto) -->
+          <li class="nav-item"><a class="nav-link active" href="#">Grid</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Teks</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Tabel</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Form</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END NAVBAR -->
+
+
+  <!--
+    =====================================================================
+    CONTAINER — Pembungkus utama konten halaman.
+
+    .container       → lebar tetap, responsif, ada batas kiri-kanan
+                       (setara dengan max-width + margin: 0 auto di CSS biasa)
+    .container-fluid → lebar penuh 100% layar
+    .mt-4            → margin-top: 1.5rem  (m=margin, t=top, 4=level)
+    .mb-5            → margin-bottom: 3rem
+    =====================================================================
+  -->
+  <div class="container mt-4 mb-5">
+
+
+    <!-- ================================================================
+         BAGIAN 1 — BOOTSTRAP GRID SYSTEM
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">1. Bootstrap Grid System</p>
+
+      <!--
+        PENJELASAN BREAKPOINT (titik patah responsif):
+        ┌──────────────┬──────────────┬──────────────┐
+        │ Class prefix │ Layar        │ CSS setara   │
+        ├──────────────┼──────────────┼──────────────┤
+        │ .col-        │ < 576px (xs) │ (selalu)     │
+        │ .col-sm-     │ ≥ 576px      │ min-width:576px│
+        │ .col-md-     │ ≥ 768px      │ min-width:768px│
+        │ .col-lg-     │ ≥ 992px      │ min-width:992px│
+        │ .col-xl-     │ ≥ 1200px     │ min-width:1200px│
+        └──────────────┴──────────────┴──────────────┘
+        Total kolom dalam 1 baris = 12.
+        Contoh: col-md-8 + col-md-4 = 12 (full width saat ≥768px)
+      -->
+
+      <p class="label-ket mb-2">
+        Contoh: 2 kolom di layar desktop (md ke atas), 1 kolom di HP.
+        <code>col-12 col-md-8</code> = penuh di HP, 8/12 di desktop.
+      </p>
+
+      <!-- .row → 1 baris grid (setara display:flex + flex-wrap:wrap di CSS) -->
+      <div class="row g-3">
+        <!-- g-3 = gap antar kolom (gutter), setara gap: 1rem di CSS flex/grid -->
+
+        <!-- col-12 → selalu penuh (12/12) di semua layar -->
+        <!-- col-md-8 → menjadi 8 dari 12 kolom SAAT layar ≥ 768px -->
+        <div class="col-12 col-md-8">
+          <div class="bg-primary text-white rounded p-3 text-center">
+            <code>.col-12 .col-md-8</code>
+            <div class="label-ket text-white-50">HP: full width | Desktop: 8/12</div>
+          </div>
+        </div>
+
+        <!-- col-md-4 → menjadi 4 dari 12 kolom SAAT layar ≥ 768px -->
+        <div class="col-12 col-md-4">
+          <div class="bg-secondary text-white rounded p-3 text-center">
+            <code>.col-12 .col-md-4</code>
+            <div class="label-ket text-white-50">HP: full width | Desktop: 4/12</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-1">
+        <!-- 3 kolom sama rata saat md ke atas -->
+        <div class="col-6 col-md-4">
+          <div class="bg-info text-dark rounded p-2 text-center">
+            <code>.col-6 .col-md-4</code>
+          </div>
+        </div>
+        <div class="col-6 col-md-4">
+          <div class="bg-info text-dark rounded p-2 text-center">
+            <code>.col-6 .col-md-4</code>
+          </div>
+        </div>
+        <div class="col-6 col-md-4">
+          <div class="bg-info text-dark rounded p-2 text-center">
+            <code>.col-6 .col-md-4</code>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END GRID -->
+
+
+    <!-- ================================================================
+         BAGIAN 2 — TEXT STYLE
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">2. Text Style (Utility Class Teks)</p>
+
+      <!--
+        Utility class teks Bootstrap vs. CSS biasa:
+        .text-start   = text-align: left
+        .text-center  = text-align: center
+        .text-end     = text-align: right
+        .text-lowercase  = text-transform: lowercase
+        .text-uppercase  = text-transform: uppercase
+        .text-capitalize = text-transform: capitalize
+        .fw-bold      = font-weight: 700
+        .fw-normal    = font-weight: 400
+        .fw-light     = font-weight: 300
+        .fst-italic   = font-style: italic
+        .fs-1 s/d .fs-6 = font-size skala (fs-1 paling besar)
+      -->
+
+      <p class="text-start"><code>.text-start</code> → Rata kiri (text-align: left)</p>
+      <p class="text-center"><code>.text-center</code> → Rata tengah (text-align: center)</p>
+      <p class="text-end"><code>.text-end</code> → Rata kanan (text-align: right)</p>
+      <p class="text-lowercase"><code>.text-lowercase</code> → SEMUA JADI KECIL</p>
+      <p class="text-uppercase"><code>.text-uppercase</code> → semua jadi besar</p>
+      <p class="text-capitalize"><code>.text-capitalize</code> → huruf pertama tiap kata besar</p>
+      <p class="fw-bold"><code>.fw-bold</code> → teks tebal (font-weight: 700)</p>
+      <p class="fw-light"><code>.fw-light</code> → teks tipis (font-weight: 300)</p>
+      <p class="fst-italic"><code>.fst-italic</code> → teks miring (font-style: italic)</p>
+
+      <hr/>
+
+      <!--
+        .h1 s/d .h6 → meniru tampilan heading tanpa mengubah struktur HTML.
+        Berguna saat kamu ingin tampilan H1 tapi elemen tetap <p> atau <span>.
+      -->
+      <p class="h1">Tampak seperti H1 (class .h1)</p>
+      <p class="h4">Tampak seperti H4 (class .h4)</p>
+      <p class="h6">Tampak seperti H6 (class .h6)</p>
+
+      <hr/>
+
+      <!--
+        Warna teks — Bootstrap utility color:
+        .text-primary   = biru
+        .text-success   = hijau
+        .text-danger    = merah
+        .text-warning   = kuning
+        .text-muted     = abu-abu (color: #6c757d)
+        .text-white     = putih
+      -->
+      <p class="text-primary"><code>.text-primary</code> → Biru</p>
+      <p class="text-success"><code>.text-success</code> → Hijau</p>
+      <p class="text-danger"><code>.text-danger</code> → Merah</p>
+      <p class="text-warning"><code>.text-warning</code> → Kuning</p>
+      <p class="text-muted"><code>.text-muted</code> → Abu-abu (color: #6c757d)</p>
+    </div>
+    <!-- END TEXT STYLE -->
+
+
+    <!-- ================================================================
+         BAGIAN 3 — TABEL
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">3. Bootstrap Table</p>
+
+      <!--
+        .table           → style tabel dasar Bootstrap (border tipis, padding)
+        .table-striped   → warna baris selang-seling (genap/ganjil)
+        .table-hover     → baris berubah warna saat mouse hover
+        .table-bordered  → border di semua sisi sel
+        .table-dark      → latar tabel jadi gelap
+        .table-sm        → padding sel lebih kecil
+        .thead-dark      → baris header (<thead>) berlatar gelap
+        .table-responsive→ tabel bisa di-scroll horizontal (setara overflow-x: auto)
+      -->
+
+      <p class="label-ket mb-2">Contoh tabel dengan <code>.table .table-hover .table-striped</code></p>
+
+      <!-- .table-responsive memastikan tabel tidak overflow di layar kecil -->
+      <div class="table-responsive">
+        <table class="table table-hover table-striped table-bordered">
+          <thead class="table-dark">
+            <!-- table-dark di thead = background gelap hanya untuk header -->
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nama Lengkap</th>
+              <th scope="col">Asal Kota</th>
+              <th scope="col">Umur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Budi Rojadi</td>
+              <td>Semarang</td>
+              <td>35 th</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Yulia Santi</td>
+              <td>Bekasi</td>
+              <td>32 th</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Fahri Abdilah</td>
+              <td>Medan</td>
+              <td>38 th</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- END TABEL -->
+
+
+    <!-- ================================================================
+         BAGIAN 4 — IMAGE
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">4. Bootstrap Image</p>
+
+      <!--
+        .img-fluid      → gambar responsif: max-width:100%; height:auto;
+                          gambar tidak akan meluber keluar container.
+        .img-thumbnail  → gambar dengan border tipis + padding kecil
+                          (setara: border: 1px solid #dee2e6; border-radius: 4px)
+        .rounded        → sudut bulat (border-radius: 0.375rem)
+        .rounded-circle → gambar jadi lingkaran penuh (border-radius: 50%)
+        .float-start    → mengapungkan gambar ke kiri (float: left)
+        .float-end      → mengapungkan gambar ke kanan (float: right)
+        .d-block        → display: block
+        .mx-auto        → margin: 0 auto (horizontally centered)
+      -->
+
+      <div class="row g-3 align-items-center">
+        <div class="col-auto">
+          <!-- Gambar placeholder dari picsum.photos, bukan gambar lokal -->
+          <img
+            src="https://picsum.photos/120/80?grayscale"
+            class="img-thumbnail"
+            alt="Thumbnail"
+          />
+          <div class="label-ket text-center">.img-thumbnail</div>
+        </div>
+
+        <div class="col-auto">
+          <img
+            src="https://picsum.photos/120/80"
+            class="img-fluid rounded"
+            alt="Fluid"
+          />
+          <div class="label-ket text-center">.img-fluid .rounded</div>
+        </div>
+
+        <div class="col-auto">
+          <!-- rounded-circle biasanya untuk gambar persegi agar jadi lingkaran -->
+          <img
+            src="https://picsum.photos/80/80?random=5"
+            class="rounded-circle"
+            alt="Circle"
+            width="80"
+            height="80"
+          />
+          <div class="label-ket text-center">.rounded-circle</div>
+        </div>
+      </div>
+    </div>
+    <!-- END IMAGE -->
+
+
+    <!-- ================================================================
+         BAGIAN 5 — BUTTON
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">5. Bootstrap Button</p>
+
+      <!--
+        .btn            → class dasar wajib untuk semua tombol Bootstrap
+        .btn-primary    → warna biru (warna "utama")
+        .btn-secondary  → warna abu-abu
+        .btn-success    → warna hijau
+        .btn-danger     → warna merah
+        .btn-warning    → warna kuning
+        .btn-info       → warna biru muda
+        .btn-light      → warna putih/terang
+        .btn-dark       → warna gelap
+        .btn-link       → tampil seperti hyperlink (tanpa background)
+
+        UKURAN:
+        .btn-sm         → ukuran kecil  (padding lebih kecil, font lebih kecil)
+        .btn-lg         → ukuran besar
+
+        LEBAR:
+        .w-100          → lebar penuh 100% container (width: 100%)
+
+        OUTLINE (tidak ada background, hanya border + teks berwarna):
+        .btn-outline-primary, .btn-outline-success, dst.
+      -->
+
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <!-- gap-2 = jarak antar elemen (setara gap: 0.5rem di CSS flexbox) -->
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-secondary">Secondary</button>
+        <button class="btn btn-success">Success</button>
+        <button class="btn btn-danger">Danger</button>
+        <button class="btn btn-warning">Warning</button>
+        <button class="btn btn-info">Info</button>
+        <button class="btn btn-light border">Light</button>
+        <button class="btn btn-dark">Dark</button>
+        <button class="btn btn-link">Link</button>
+      </div>
+
+      <p class="label-ket mb-1">Ukuran button:</p>
+      <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+        <button class="btn btn-primary btn-sm">btn-sm (kecil)</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">btn-lg (besar)</button>
+      </div>
+
+      <p class="label-ket mb-1">Outline button (tanpa fill):</p>
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <button class="btn btn-outline-primary">Outline Primary</button>
+        <button class="btn btn-outline-success">Outline Success</button>
+        <button class="btn btn-outline-danger">Outline Danger</button>
+      </div>
+
+      <p class="label-ket mb-1">Lebar penuh dengan <code>.w-100</code>:</p>
+      <button class="btn btn-success w-100">Tombol Lebar Penuh (w-100 = width: 100%)</button>
+    </div>
+    <!-- END BUTTON -->
+
+
+    <!-- ================================================================
+         BAGIAN 6 — FORM
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">6. Bootstrap Form</p>
+
+      <!--
+        .form-label     → label teks di atas input (display: block, margin-bottom kecil)
+        .form-control   → styling elemen input (border, padding, border-radius)
+                          Berlaku untuk: <input>, <textarea>, <select>
+        .form-select    → khusus untuk <select> (dropdown)
+        .form-check     → wrapper untuk checkbox / radio
+        .form-check-input  → elemen <input type="checkbox"> atau <input type="radio">
+        .form-check-label  → label yang menempel ke checkbox/radio
+        .mb-3           → margin-bottom: 1rem (jarak antar field)
+        .row .col-sm-*  → membuat form horizontal menggunakan grid Bootstrap
+        .col-form-label → label yang vertikal-center dengan input (untuk form horizontal)
+        .offset-sm-2    → geser kolom 2 slot ke kanan (setara margin-left: 16.67%)
+      -->
+
+      <!-- FORM HORIZONTAL menggunakan Grid Bootstrap -->
+      <p class="label-ket mb-3">Contoh Form Horizontal — label di kiri, input di kanan:</p>
+
+      <form>
+        <!-- Baris 1: Username -->
+        <div class="row mb-3">
+          <!--
+            .col-sm-2       → label mengambil 2/12 lebar SAAT layar ≥ sm (576px)
+            .col-form-label → menyamakan tinggi label dengan input (vertical center)
+          -->
+          <label for="uname" class="col-sm-2 col-form-label fw-semibold">Username</label>
+          <div class="col-sm-10">
+            <!--
+              .form-control → input dengan styling Bootstrap
+              placeholder   → teks abu-abu di dalam input saat kosong
+            -->
+            <input
+              type="text"
+              class="form-control"
+              id="uname"
+              placeholder="Masukkan username"
+              name="uname"
+            />
+          </div>
+        </div>
+
+        <!-- Baris 2: Password -->
+        <div class="row mb-3">
+          <label for="pwd" class="col-sm-2 col-form-label fw-semibold">Password</label>
+          <div class="col-sm-10">
+            <input
+              type="password"
+              class="form-control"
+              id="pwd"
+              placeholder="Masukkan password"
+              name="pwd"
+            />
+          </div>
+        </div>
+
+        <!-- Baris 3: Kota (select/dropdown) -->
+        <div class="row mb-3">
+          <label for="kota" class="col-sm-2 col-form-label fw-semibold">Kota</label>
+          <div class="col-sm-10">
+            <!-- .form-select → dropdown styling Bootstrap -->
+            <select class="form-select" id="kota" name="kota">
+              <option value="">-- Pilih Kota --</option>
+              <option value="sby">Surabaya</option>
+              <option value="jkt">Jakarta</option>
+              <option value="bdg">Bandung</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Baris 4: Checkbox -->
+        <div class="row mb-3">
+          <div class="col-sm-10 offset-sm-2">
+            <!--
+              offset-sm-2 → geser kolom 2 posisi ke kanan (agar sejajar dengan input di atas)
+              Setara dengan: margin-left: 16.67% saat layar ≥ 576px
+            -->
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="ingat" />
+              <label class="form-check-label" for="ingat">
+                Ingat saya
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Baris 5: Tombol Submit -->
+        <div class="row">
+          <div class="col-sm-10 offset-sm-2">
+            <button type="submit" class="btn btn-primary">
+              Masuk
+            </button>
+            <button type="reset" class="btn btn-outline-secondary ms-2">
+              Reset
+              <!-- ms-2 = margin-start: 0.5rem → jarak kiri tombol (margin-left: 0.5rem) -->
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- END FORM -->
+
+
+    <!-- ================================================================
+         BAGIAN 7 — SPACING UTILITIES (Bonus penjelasan)
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">7. Spacing Utilities — m & p</p>
+
+      <!--
+        Bootstrap punya shorthand untuk margin (m) dan padding (p):
+
+        FORMAT: {property}{sisi}-{ukuran}
+
+        Property:
+          m  = margin
+          p  = padding
+
+        Sisi:
+          t  = top
+          b  = bottom
+          s  = start (kiri dalam LTR = margin-left / padding-left)
+          e  = end   (kanan dalam LTR = margin-right / padding-right)
+          x  = kiri + kanan (horizontal)
+          y  = atas + bawah (vertical)
+         (kosong) = semua sisi
+
+        Ukuran (default scale):
+          0  = 0
+          1  = 0.25rem (4px)
+          2  = 0.5rem  (8px)
+          3  = 1rem    (16px)
+          4  = 1.5rem  (24px)
+          5  = 3rem    (48px)
+          auto = margin: auto
+
+        Contoh:
+          mt-3   → margin-top: 1rem
+          mb-4   → margin-bottom: 1.5rem
+          px-2   → padding-left: 0.5rem; padding-right: 0.5rem
+          ms-auto → margin-left: auto (mendorong elemen ke kanan)
+          py-5   → padding-top: 3rem; padding-bottom: 3rem
+      -->
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="bg-light border rounded p-0 text-center text-muted">
+            <code>p-0</code> = padding: 0
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-light border rounded p-4 text-center">
+            <code>p-4</code> = padding: 1.5rem
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-warning rounded px-3 py-1 d-inline-block">
+            <code>px-3 py-1</code> = horizontal 1rem, vertical 0.25rem
+          </div>
+        </div>
+        <div class="col-md-6 d-flex">
+          <div class="bg-info text-dark rounded p-2 me-auto">
+            <code>me-auto</code> = margin-right: auto (geser ke kiri)
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END SPACING -->
+
+
+    <!-- ================================================================
+         BAGIAN 8 — DISPLAY & FLEXBOX UTILITIES (Bonus)
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">8. Display & Flexbox Utilities</p>
+
+      <!--
+        .d-none         → display: none  (sembunyikan)
+        .d-block        → display: block
+        .d-inline       → display: inline
+        .d-inline-block → display: inline-block
+        .d-flex         → display: flex  (aktifkan flexbox)
+        .d-grid         → display: grid
+
+        RESPONSIF: tambah breakpoint di tengah
+        .d-md-none    → display:none SAAT layar ≥ md (768px)
+        .d-md-block   → display:block SAAT layar ≥ md
+
+        FLEXBOX utilities (hanya berlaku saat parent punya .d-flex):
+        .flex-row        → flex-direction: row (default)
+        .flex-column     → flex-direction: column
+        .flex-wrap       → flex-wrap: wrap
+        .justify-content-start   → justify-content: flex-start
+        .justify-content-center  → justify-content: center
+        .justify-content-end     → justify-content: flex-end
+        .justify-content-between → justify-content: space-between
+        .align-items-center      → align-items: center
+        .gap-2           → gap: 0.5rem (jarak antar item flex/grid)
+      -->
+
+      <div class="d-flex justify-content-between align-items-center border rounded p-3 mb-3">
+        <span class="badge bg-primary">Kiri</span>
+        <span class="badge bg-secondary">Tengah (space-between)</span>
+        <span class="badge bg-success">Kanan</span>
+      </div>
+
+      <div class="d-flex flex-column gap-2 border rounded p-3">
+        <div class="bg-light border rounded p-2"><code>.flex-column</code> → item 1</div>
+        <div class="bg-light border rounded p-2">item 2</div>
+        <div class="bg-light border rounded p-2">item 3</div>
+      </div>
+
+      <!--
+        BADGE — elemen kecil untuk label/notifikasi
+        .badge   → styling badge Bootstrap
+        .bg-*    → warna background (bg-primary, bg-danger, dst.)
+      -->
+      <div class="mt-3">
+        <p class="label-ket mb-2">Badge:</p>
+        <span class="badge bg-primary">Primary</span>
+        <span class="badge bg-success ms-1">Success</span>
+        <span class="badge bg-danger ms-1">Danger</span>
+        <span class="badge bg-warning text-dark ms-1">Warning</span>
+        <span class="badge rounded-pill bg-info ms-1">Pill Badge</span>
+        <!--
+          .rounded-pill → border-radius: 50rem (membuat badge lonjong seperti pil)
+        -->
+      </div>
+    </div>
+    <!-- END DISPLAY & FLEX -->
+
+
+    <!-- ================================================================
+         BAGIAN 9 — ALERT & MODAL (Bonus interaktif)
+         ================================================================ -->
+    <div class="demo-card">
+      <p class="section-title">9. Alert & Modal</p>
+
+      <!--
+        ALERT:
+        .alert            → komponen pesan/notifikasi
+        .alert-success    → hijau
+        .alert-danger     → merah
+        .alert-warning    → kuning
+        .alert-info       → biru muda
+        .alert-dismissible → membuat alert bisa ditutup (butuh tombol close)
+        .fade .show       → animasi fade saat dismiss
+
+        data-bs-dismiss="alert" → atribut Bootstrap JS untuk menutup alert
+      -->
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Berhasil!</strong> Data berhasil disimpan.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <!-- btn-close → tombol X Bootstrap untuk menutup komponen -->
+      </div>
+
+      <div class="alert alert-danger" role="alert">
+        <strong>Error!</strong> Terjadi kesalahan pada server.
+      </div>
+
+      <div class="alert alert-warning" role="alert">
+        <strong>Perhatian!</strong> Koneksi internet tidak stabil.
+      </div>
+
+      <!--
+        MODAL — popup dialog
+        .modal            → container modal (tersembunyi secara default: display:none)
+        .modal-dialog     → wrapper dialog
+        .modal-content    → konten modal (background putih, border-radius, shadow)
+        .modal-header     → area judul modal
+        .modal-body       → area konten utama
+        .modal-footer     → area tombol aksi
+        .modal-title      → judul teks dalam header
+
+        data-bs-toggle="modal" → trigger buka modal via JavaScript Bootstrap
+        data-bs-target="#idModal" → ID modal yang akan dibuka
+        data-bs-dismiss="modal"  → tutup modal (dipakai di tombol dalam modal)
+      -->
+
+      <!-- Tombol pemicu modal -->
+      <button
+        type="button"
+        class="btn btn-primary mt-2"
+        data-bs-toggle="modal"
+        data-bs-target="#contohModal"
+      >
+        Buka Modal
+      </button>
+
+      <!-- Struktur Modal -->
+      <div class="modal fade" id="contohModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="judulModal">Judul Modal</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Ini adalah isi konten modal. Bisa diisi teks, form, gambar, atau apapun.
+            </div>
+            <div class="modal-footer">
+              <!-- Dua tombol: batal (menutup modal) & simpan -->
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+              <button type="button" class="btn btn-primary">Simpan</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END MODAL -->
+    </div>
+    <!-- END ALERT & MODAL -->
+
+  </div>
+  <!-- END CONTAINER -->
+
+
+  <!--
+    =====================================================================
+    FOOTER
+    .py-4  → padding-top: 1.5rem; padding-bottom: 1.5rem
+    .text-center → text-align: center
+    =====================================================================
+  -->
+  <footer class="py-4 text-center">
+    <div class="container">
+      <p class="mb-0" style="font-size: 0.85rem;">
+        Pemrograman Web — Pengenalan Bootstrap 5
+      </p>
+    </div>
+  </footer>
+
+
+  <!--
+    =====================================================================
+    IMPORT JAVASCRIPT Bootstrap via CDN
+    Letakkan SEBELUM </body> agar HTML selesai dimuat sebelum JS berjalan.
+
+    bootstrap.bundle.min.js → sudah termasuk Popper.js di dalamnya.
+    Popper.js dibutuhkan untuk komponen seperti Dropdown, Tooltip, Modal.
+
+    jQuery → opsional di Bootstrap 5 (Bootstrap 5 sudah tidak wajib jQuery).
+    Tapi bisa ditambahkan jika kamu pakai plugin lain yang butuh jQuery.
+    =====================================================================
+  -->
+  <script
+    src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"
+  ></script>
+
+</body>
+</html>
