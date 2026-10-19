@@ -13,24 +13,39 @@ JAWAB:
 3.  Grid adalah style dengan 2 dimensi, memiliki column dan row
     PENJELASAN BREAKPOINT (titik patah responsif):
          ┌──────────────┬──────────────┬──────────────┐
+
          │ Class prefix │ Layar        │ CSS setara   │
+
          ├──────────────┼──────────────┼──────────────┤
+
          │ .col-        │ < 576px (xs) │ (selalu)     │
+
          │ .col-sm-     │ ≥ 576px      │ min-width:576px│
+
          │ .col-md-     │ ≥ 768px      │ min-width:768px│
+
          │ .col-lg-     │ ≥ 992px      │ min-width:992px│
+
          │ .col-xl-     │ ≥ 1200px     │ min-width:1200px│
+
          └──────────────┴──────────────┴──────────────┘
+
          Total kolom dalam 1 baris = 12.
+
          Contoh: col-md-8 + col-md-4 = 12 (full width saat ≥768px)
     sumber: bootstrap-pengenalan.html (line: 174)
 4.  .navbar           → membuat elemen jadi bar navigasi
+
     .navbar-expand-md → navbar melebar (horizontal) saat layar ≥ md (768px)
+
                         Di bawah md, navbar collapse jadi tombol hamburger.
                         [md di Bootstrap = @media (min-width: 768px) di CSS biasa]
     .navbar-dark      → teks & ikon navbar berwarna terang (untuk bg gelap)
+
     .bg-dark          → background gelap (Bootstrap utility color)
+
     .container        → membatasi lebar konten ke lebar tertentu (responsif)
+    
     sumber: bootstrap-pengenalan.html (line: 102)
 5. Gunakan class img-fluid pada tag <img>. Class ini menerapkan max-width: 100% dan height: auto, sehingga gambar mengecil mengikuti lebar elemen induknya dan proporsinya tetap, tapi tidak melebihi ukuran aslinya.
 
